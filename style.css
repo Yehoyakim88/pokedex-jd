@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    background-color: rgba(190, 187, 187, 1);
+}
+
+.headerSub {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.headerSub img {
+    margin: 32px;
+}
+
+.hovereffect:hover {
+    cursor: pointer;
+    filter: brightness(0.5);
+}
+
+.main {
+    background-color: rgb(224,15,43);
+    border-radius: 10px;
+    /* height: 100vh; */
+    margin: 20px;
+}
+
+.pokeContent {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.pokeCard {
+    padding: 16px;
+    margin: 16px;
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+    background-color: rgb(33, 30, 166);
+}
+
+.pokeCard:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
+}
+
+.pokeImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    align-self: center;
+}
