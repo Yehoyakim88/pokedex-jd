@@ -46,9 +46,21 @@ body {
     filter: brightness(1.5);
 }
 
+.cardTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cardBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .pokeImage {
-    width: 100px;
-    height: 100px;
+    width: 96px;
+    height: 96px;
     object-fit: cover;
     align-self: center;
 }

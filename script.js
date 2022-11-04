@@ -9,25 +9,56 @@ let pokeNumbers = [];
 
 function testCards() {
   let content = document.getElementById('poke-content');
+  let resultArray = [];
+  let name;
+  let image;
 
-  for (let index = 0; index < 24; index++) {
-    content.innerHTML += /*html*/ `
-        <div id="pokemon-${index}" class="pokeCard">
-            Card ${index}
-        </div>
-        `;
-    document.getElementById(`pokemon-${index}`).style.backgroundImage = "url('./img/pokeball.webp')";
+  for (let index = 1; index < 24; index++) {
+    console.log(`loadPokemon(${index})`);
+    loadPokemon(index);    
   }
+//   loadPokemon('1');
 }
 
 
-function drawPokeCard(pokeNumber, pokeImage, pokeBackgroundColor) {
+async function loadPokemon(pokemonNumber) {
+    let url;
+    let response;
+    let responseAsJson;
+    let pokemonName;
+    let pokemonImage;
+
+    url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
+    console.log(`Pokemon to load: ${url}`);
+
+    response = await fetch(url);
+    responseAsJson = await response.json();
+    // pokemonName = responseAsJson['forms'][0]['name'];
+    pokemonName = responseAsJson['name'];
+    pokemonImage = responseAsJson['sprites']['other']['dream_world']['front_default'];
+
+    // pokemonName = responseAsJson['forms']['name'];
+    console.log(pokemonImage);
+    drawPokeCard(pokemonName, pokemonNumber, pokemonImage, "white");
+}
+
+
+function drawPokeCard(pokeName, pokeNumber, pokeImage, pokeBackgroundColor) {
+    let content = document.getElementById('poke-content');
     content.innerHTML += /*html*/ `
     <div id="pokemon-${pokeNumber}" class="pokeCard">
+       <div id="card-top" class="cardTop">
+        <span id="name-${pokeNumber}">${pokeName}</span>
+        <span id="number-pokemon-${pokeNumber}">#${pokeNumber}</span>
+       </div>
+       <div class="cardBottom">
+        <div class="type">
+            <span>Typus</span>
+        </div>
         <img id="poke-image-${pokeNumber}" class="pokeImage" src=${pokeImage} alt="NOT_FOUND">
+       </div>
     </div>
     `;
+    document.getElementById(`pokemon-${pokeNumber}`).style.backgroundColor = pokeBackgroundColor;
+    document.getElementById(`pokemon-${pokeNumber}`).style.backgroundImage = "url('./img/pokeball.webp')";
 }
-
-
-
