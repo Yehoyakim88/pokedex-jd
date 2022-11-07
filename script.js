@@ -41,7 +41,7 @@ async function loadPokemon() {
     let name;
     let image;
 
-    for (let index = 1; index < 24; index++) {
+    for (let index = 1; index < 152; index++) {
       console.log(`loadPokemon(${index})`);
       url = "https://pokeapi.co/api/v2/pokemon/" + index + "/";
     console.log(`Pokemon to load: ${url}`);
@@ -50,7 +50,8 @@ async function loadPokemon() {
     responseAsJson = await response.json();
     // pokemonName = responseAsJson['forms'][0]['name'];
     pokemonName = responseAsJson['name'];
-    pokemonImage = responseAsJson['sprites']['other']['dream_world']['front_default'];
+    // pokemonImage = responseAsJson['sprites']['other']['dream_world']['front_default'];
+    pokemonImage = responseAsJson['sprites']['other']['official-artwork']['front_default']
 
     // pokemonName = responseAsJson['forms']['name'];
     console.log(pokemonImage);
@@ -65,7 +66,7 @@ async function loadPokemon() {
 function drawPokeCard(pokeName, pokeNumber, pokeImage, pokeBackgroundColor) {
     let content = document.getElementById('poke-content');
     content.innerHTML += /*html*/ `
-    <div id="pokemon-${pokeNumber}" class="pokeCard">
+    <div id="pokemon-${pokeNumber}" class="pokeCard zoom">
        <div id="card-top" class="cardTop">
         <span id="name-${pokeNumber}">${pokeName}</span>
         <span id="number-pokemon-${pokeNumber}">#${pokeNumber}</span>
@@ -78,6 +79,6 @@ function drawPokeCard(pokeName, pokeNumber, pokeImage, pokeBackgroundColor) {
        </div>
     </div>
     `;
-    document.getElementById(`pokemon-${pokeNumber}`).style.backgroundColor = pokeBackgroundColor;
-    document.getElementById(`pokemon-${pokeNumber}`).style.backgroundImage = "url('./img/pokeball.webp')";
+    // document.getElementById(`pokemon-${pokeNumber}`).style.backgroundColor = pokeBackgroundColor;
+    // document.getElementById(`pokemon-${pokeNumber}`).style.backgroundImage = "url('./img/pokeball.png')";
 }
