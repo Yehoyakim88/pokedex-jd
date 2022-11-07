@@ -6,6 +6,18 @@ let pokeNames = [];
 let pokeNumbers = [];
 
 
+async function includeHTML() {
+  let includeElements = document.querySelectorAll('[w3-include-html]');
+  for (let i = 0; i < includeElements.length; i++) {
+    const element = includeElements[i];
+    file = element.getAttribute("w3-include-html"); // Pfad zum einzubindenden html-File
+    let resp = await fetch(file);
+    element.innerHTML = await resp.text();
+    debugger;
+    
+  }
+}
+
 
 function testCards() {
   let content = document.getElementById('poke-content');
