@@ -11,36 +11,39 @@ async function includeHTML() {
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
     file = element.getAttribute("w3-include-html"); // Pfad zum einzubindenden html-File
-    let resp = await fetch(file);
-    element.innerHTML = await resp.text();
-    debugger;
+    if(resp.ok) {
+      let resp = await fetch(file);
+      element.innerHTML = await resp.text();
+    }
+    else {
+      element.innerHTML = 'Page not found.';
+    }
     
   }
 }
 
 
-function testCards() {
-  let content = document.getElementById('poke-content');
-  let resultArray = [];
-  let name;
-  let image;
-
-  for (let index = 1; index < 24; index++) {
-    console.log(`loadPokemon(${index})`);
-    loadPokemon(index);    
-  }
-//   loadPokemon('1');
-}
+// function testCards() {
+  
+// //   loadPokemon('1');
+// }
 
 
-async function loadPokemon(pokemonNumber) {
+async function loadPokemon() {
     let url;
     let response;
     let responseAsJson;
     let pokemonName;
     let pokemonImage;
 
-    url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
+    let content = document.getElementById('poke-content');
+    let resultArray = [];
+    let name;
+    let image;
+
+    for (let index = 1; index < 24; index++) {
+      console.log(`loadPokemon(${index})`);
+      url = "https://pokeapi.co/api/v2/pokemon/" + index + "/";
     console.log(`Pokemon to load: ${url}`);
 
     response = await fetch(url);
@@ -51,7 +54,11 @@ async function loadPokemon(pokemonNumber) {
 
     // pokemonName = responseAsJson['forms']['name'];
     console.log(pokemonImage);
-    drawPokeCard(pokemonName, pokemonNumber, pokemonImage, "white");
+    drawPokeCard(pokemonName, index, pokemonImage, "white");    
+    }
+
+
+    
 }
 
 
